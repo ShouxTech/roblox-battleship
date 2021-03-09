@@ -2,8 +2,8 @@ import { KnitClient as Knit } from '@rbxts/knit';
 import { Players, TweenService } from '@rbxts/services';
 
 interface Position {
-    x: number,
-    y: number
+    x: number;
+    y: number;
 };
 
 interface ShotData {
@@ -16,6 +16,7 @@ interface ShotData {
 const DEFAULT_OBJECT_COLOR = Color3.fromRGB(0, 113, 162);
 const DEFAULT_CORNER_RADIUS = new UDim(0, 6);
 const HIT_COLOR = Color3.fromRGB(255, 193, 7);
+const CHOSEN_COLOR = Color3.fromRGB(0, 139, 198);
 
 const battleshipGUI = (Players.LocalPlayer.FindFirstChildOfClass('PlayerGui') as PlayerGui).WaitForChild('BattleshipGUI') as ScreenGui;
 const mainFrame = battleshipGUI.WaitForChild('MainFrame') as Frame;
@@ -66,6 +67,8 @@ const BattleshipController = Knit.CreateController({
                     if (shotData.failed) return;
                     if (shotData.didHit) {
                         objectBtn.BackgroundColor3 = HIT_COLOR;
+                    } else {
+                        objectFrame.BackgroundColor3 = CHOSEN_COLOR;
                     }
                     TweenService.Create(objectBtn.FindFirstChildOfClass('UICorner')!, new TweenInfo(0.23), {CornerRadius: new UDim(0, 20)}).Play();
                 });
@@ -103,6 +106,8 @@ const BattleshipController = Knit.CreateController({
             const objectFrame = objects.get(shotData.x!)!.get(shotData.y!)!;
             if (shotData.didHit) {
                 objectFrame.BackgroundColor3 = HIT_COLOR;
+            } else {
+                objectFrame.BackgroundColor3 = CHOSEN_COLOR;
             }
             TweenService.Create(objectFrame.FindFirstChildOfClass('UICorner')!, new TweenInfo(0.23), {CornerRadius: new UDim(0, 20)}).Play();
         });
