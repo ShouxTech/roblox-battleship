@@ -68,7 +68,7 @@ const BattleshipController = Knit.CreateController({
                     if (shotData.didHit) {
                         objectBtn.BackgroundColor3 = HIT_COLOR;
                     } else {
-                        objectFrame.BackgroundColor3 = CHOSEN_COLOR;
+                        objectBtn.BackgroundColor3 = CHOSEN_COLOR;
                     }
                     TweenService.Create(objectBtn.FindFirstChildOfClass('UICorner')!, new TweenInfo(0.23), {CornerRadius: new UDim(0, 20)}).Play();
                 });
